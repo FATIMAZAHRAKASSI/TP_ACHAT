@@ -1,0 +1,51 @@
+﻿@page
+@model TP_ACHAT.Pages.Produits.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Les produits</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<div class="mb-4"></div>
+
+<form method="get">
+    <div class="form-group row">
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Nom" asp-for="SearchString" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Description" asp-for="SearchString2" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </div>
+</form>
+
+<div class="mb-4"></div>
+
+
+<div class="row">
+    @foreach (var item in Model.Produit)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card" >
+                <img src="@item.image"  alt="Image" class="card-img-top custom-image">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    <p class="card-text">Price: @Html.DisplayFor(modelItem => item.Price)</p>
+                    <p class="card-text">Stock Quantity: @Html.DisplayFor(modelItem => item.StockQuantity)</p>
+                    <a href="@Url.Page("./Edit", new { id = item.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Page("./Details", new { id = item.Id })" class="btn btn-secondary">Details</a>
+                    <a href="@Url.Page("./Delete", new { id = item.Id })" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
